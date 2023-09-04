@@ -8,10 +8,23 @@ class Ball(Turtle):
         self.shapesize(stretch_wid=1, stretch_len=1)
         self.penup()
         self.color("white")
+        self.x_move = 8
+        self.y_move = 8
+        self.ball_speed = 0.1
 
     def move(self):
-        if self.xcor() < 350 and self.ycor() < 280:
+        new_x = self.xcor() + self.x_move
+        new_y = self.ycor() + self.y_move
+        self.goto(new_x, new_y)
 
-            new_x = self.xcor() + 10
-            new_y = self.ycor() + 10
-            self.goto(new_x, new_y)
+    def y_bounce(self):
+        self.y_move *= -1
+
+    def x_bounce(self):
+        self.x_move *= -1
+        self.ball_speed *= 0.9
+
+    def reset_ball_position(self):
+        self.goto(0, 0)
+        self.ball_speed = 0.1
+        self.x_bounce()
